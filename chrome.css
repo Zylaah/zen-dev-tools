@@ -339,44 +339,26 @@
   pointer-events: none;
 }
 
-.tabbrowser-tab[zen-essential][arc-developer-active="true"] > .tab-stack > .tab-background {
+.tabbrowser-tab[zen-essential][arc-developer-active="true"] > .tab-stack {
   position: relative !important;
-  overflow: hidden !important;
-  background-color: transparent !important;
-  background-image: repeating-linear-gradient(
-    135deg,
-    #f8d526 0 7px,
-    #161616 7px 14px
-  ) !important;
-  border-radius: var(--border-radius-medium) !important;
-  /* stylelint-disable-next-line property-no-unknown */
-  corner-shape: superellipse(var(--zen-squircle-value));
 }
 
-.tabbrowser-tab[zen-essential][arc-developer-active="true"]:not([visuallyselected])
-  > .tab-stack
-  > .tab-background::before {
-  content: "" !important;
-  position: absolute !important;
-  inset: 0 !important;
-  z-index: 0 !important;
-  margin: var(--zen-essential-bg-margin, 2px) !important;
-  background: var(--zen-toolbar-element-bg) !important;
-  border-radius: calc(
-    var(--border-radius-medium) - var(--zen-essential-bg-margin, 2px)
-  ) !important;
-  /* stylelint-disable-next-line property-no-unknown */
-  corner-shape: superellipse(var(--zen-squircle-value));
+.tabbrowser-tab[zen-essential][arc-developer-active="true"] > .tab-stack::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  box-sizing: border-box;
+  padding: 2px;
   pointer-events: none;
-}
-
-.tabbrowser-tab[zen-essential][arc-developer-active="true"]:not([visuallyselected]):hover
-  > .tab-stack
-  > .tab-background::before {
-  background: light-dark(
-    rgba(0, 0, 0, 0.1),
-    var(--tab-background-color-selected)
-  ) !important;
+  border-radius: var(--border-radius-medium);
+  background: repeating-linear-gradient(135deg, #f8d526 0 7px, #161616 7px 14px) !important;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  /* stylelint-disable-next-line property-no-unknown */
+  corner-shape: superellipse(var(--zen-squircle-value));
 }
 
 :root[inDOMFullscreen="true"] .arc-developer-toolbar {
