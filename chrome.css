@@ -125,6 +125,17 @@
   height: 17px;
 }
 
+#arc-developer-split-menu .arc-developer-split-menuitem {
+  -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity;
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+#arc-developer-split-menu .arc-developer-split-menuitem .menu-iconic-icon {
+  width: 16px;
+  height: 16px;
+}
+
 .arc-developer-action:hover {
   background: color-mix(in srgb, currentColor 14%, transparent) !important;
 }

@@ -641,23 +641,32 @@
 
       menu = this.document.createXULElement("menupopup");
       menu.id = SPLIT_MENU_ID;
+      menu.classList.add("arc-developer-split-menu");
 
       const options = [
-        ["Grid", "cmd_zenSplitViewGrid"],
-        ["Vertical", "cmd_zenSplitViewVertical"],
-        ["Horizontal", "cmd_zenSplitViewHorizontal"],
-        ["Unsplit", "cmd_zenSplitViewUnsplit"],
+        ["Add Right Split", "right", "split-right"],
+        ["Add Left Split", "left", "split-left"],
+        null,
+        ["Add Top Split", "top", "split-top"],
+        ["Add Bottom Split", "bottom", "split-bottom"],
       ];
 
-      for (const [label, commandId] of options) {
+      for (const option of options) {
+        if (!option) {
+          menu.appendChild(this.document.createXULElement("menuseparator"));
+          continue;
+        }
+        const [label, side, iconName] = option;
         const item = this.document.createXULElement("menuitem");
+        item.classList.add("menuitem-iconic", "arc-developer-split-menuitem");
         item.setAttribute("label", label);
+        item.setAttribute("image", icon(iconName));
         item.addEventListener("command", () => {
           const tab = this._splitMenuTab;
           if (tab) {
             this.selectTab(tab);
           }
-          this.document.getElementById(commandId)?.doCommand();
+          this.createDirectionalSplit(side);
         });
         menu.appendChild(item);
       }
@@ -665,6 +674,19 @@
       this.document.getElementById("mainPopupSet")?.appendChild(menu);
       this._splitMenu = menu;
       return menu;
+    }
+
+    createDirectionalSplit(side) {
+      try {
+        const splitter = this.window.gZenViewSplitter;
+        if (!splitter?.createEmptySplit) {
+          console.error("[Arc Developer Toolbar] Split View API unavailable");
+          return;
+        }
+        splitter.createEmptySplit(side);
+      } catch (error) {
+        console.error("[Arc Developer Toolbar] Split failed", error);
+      }
     }
 
     openSplitMenu(tab, anchor) {
