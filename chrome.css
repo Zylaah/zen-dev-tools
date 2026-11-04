@@ -40,7 +40,7 @@
   background-color: var(--arc-developer-bg) !important;
   background-image: repeating-linear-gradient(
     135deg,
-    color-mix(in srgb, white 5%, transparent) 0 15px,
+    color-mix(in srgb, white 1%, transparent) 0 15px,
     transparent 15px 30px
   ) !important;
   border: 0;
@@ -55,7 +55,7 @@
   bottom: 0;
   height: 1px;
   pointer-events: none;
-  background: color-mix(in srgb, var(--arc-developer-fg) 15%, transparent);
+  background: color-mix(in srgb, var(--arc-developer-fg) 90%, transparent);
 }
 
 .arc-developer-toolbar[hidden] {
