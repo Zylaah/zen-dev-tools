@@ -56,12 +56,12 @@
   padding: 0 8px !important;
   border: 0 !important;
   border-radius: 0 !important;
-  background: transparent;
+  background: transparent !important;
   color: inherit !important;
   font: inherit !important;
   font-size: 12px !important;
   line-height: 28px !important;
-  outline: none;
+  outline: none !important;
   box-shadow: none !important;
 }
 
