@@ -55,7 +55,7 @@
   bottom: 0;
   height: 1px;
   pointer-events: none;
-  background: color-mix(in srgb, var(--arc-developer-fg) 70%, transparent);
+  background: color-mix(in srgb, var(--arc-developer-fg) 15%, transparent);
 }
 
 .arc-developer-toolbar[hidden] {
