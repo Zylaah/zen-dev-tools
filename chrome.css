@@ -324,19 +324,53 @@
   position: relative !important;
 }
 
-.tabbrowser-tab[arc-developer-active="true"] .tab-background::after {
+.tabbrowser-tab[arc-developer-active="true"]:not([zen-essential]) .tab-background::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 2;
   padding: 3px;
-  border-radius: var(--zen-border-radius, 10px);
+  border-radius: var(--zen-border-radius, var(--border-radius-medium, 10px));
   background: repeating-linear-gradient(135deg, #f8d526 0 7px, #161616 7px 14px);
   mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
   mask-composite: exclude;
   pointer-events: none;
+}
+
+.tabbrowser-tab[zen-essential][arc-developer-active="true"] > .tab-stack > .tab-background {
+  overflow: hidden;
+}
+
+.tabbrowser-tab[zen-essential][arc-developer-active="true"] > .tab-stack > .tab-background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  box-sizing: border-box;
+  margin: 0;
+  padding: var(--zen-essential-bg-margin, 2px);
+  border-radius: var(--border-radius-medium, 10px);
+  background: repeating-linear-gradient(135deg, #f8d526 0 7px, #161616 7px 14px);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  /* stylelint-disable-next-line property-no-unknown */
+  corner-shape: superellipse(var(--zen-squircle-value));
+}
+
+@media -moz-pref("zen.theme.essentials-favicon-bg") {
+  .tabbrowser-tab[zen-essential][arc-developer-active="true"][visuallyselected] > .tab-stack > .tab-background::before {
+    background:
+      repeating-linear-gradient(135deg, #f8d526 0 7px, #161616 7px 14px)
+        padding-box,
+      var(--zen-essential-tab-selected-bg, light-dark(rgba(255, 255, 255, 0.85), rgba(68, 64, 64, 0.85)))
+        content-box;
+    mask: none;
+  }
 }
 
 :root[inDOMFullscreen="true"] .arc-developer-toolbar {
