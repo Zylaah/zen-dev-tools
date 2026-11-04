@@ -339,8 +339,12 @@
   pointer-events: none;
 }
 
-.tabbrowser-tab[zen-essential][arc-developer-active="true"] > .tab-stack {
+.tabbrowser-tab[zen-essential][arc-developer-active="true"] > .tab-stack > .tab-background {
   position: relative !important;
+  overflow: hidden !important;
+  border-radius: var(--border-radius-medium) !important;
+  /* stylelint-disable-next-line property-no-unknown */
+  corner-shape: superellipse(var(--zen-squircle-value));
 }
 
 .tabbrowser-tab[zen-essential][arc-developer-active="true"] > .tab-stack > .tab-background::before {
@@ -353,20 +357,28 @@
   corner-shape: superellipse(var(--zen-squircle-value));
 }
 
-.tabbrowser-tab[zen-essential][arc-developer-active="true"] > .tab-stack::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 10;
-  box-sizing: border-box;
-  padding: 2px;
-  pointer-events: none;
-  border-radius: 8px;
-  background: repeating-linear-gradient(135deg, #f8d526 0 7px, #161616 7px 14px) !important;
+.tabbrowser-tab[zen-essential][arc-developer-active="true"] > .tab-stack > .tab-background::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 2 !important;
+  box-sizing: border-box !important;
+  padding: 2px !important;
+  pointer-events: none !important;
+  filter: none !important;
+  background-image: repeating-linear-gradient(
+    135deg,
+    #f8d526 0 7px,
+    #161616 7px 14px
+  ) !important;
+  background-size: auto !important;
+  background-position: 0 0 !important;
+  background-color: transparent !important;
+  border-radius: inherit !important;
   mask:
     linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite: exclude;
+    linear-gradient(#000 0 0) !important;
+  mask-composite: exclude !important;
   /* stylelint-disable-next-line property-no-unknown */
   corner-shape: superellipse(var(--zen-squircle-value));
 }
