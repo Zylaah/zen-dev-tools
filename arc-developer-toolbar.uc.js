@@ -13,6 +13,7 @@
   const PORTRAIT_PANEL_ID = "arc-portrait-panel";
   const TOAST_ID = "arc-developer-toast-container";
   const ICON_BASE = "chrome://sine/content/arc-developer-toolbar/icons/";
+  const ZEN_ICON_BASE = "chrome://browser/skin/zen-icons/";
   const BLOCKED_SCHEMES = new Set([
     "chrome",
     "resource",
@@ -50,7 +51,14 @@
   }
 
   function icon(name) {
+    if (name.startsWith("chrome://") || name.startsWith("resource://")) {
+      return name;
+    }
     return `${ICON_BASE}${name}.svg`;
+  }
+
+  function zenIcon(name) {
+    return `${ZEN_ICON_BASE}${name}.svg`;
   }
 
   class ArcDeveloperToolbarController {
@@ -454,8 +462,11 @@
         actions.appendChild(divider);
       };
 
-      addAction("Copy", "Copy URL", "copy", () => this.copyUrl(tab));
-      addAction("Capture", "Take screenshot", "capture", () =>
+      addAction("Copy", "Copy URL", zenIcon("edit-copy"), () =>
+        this.copyUrl(tab)
+      );
+      addDivider();
+      addAction("Capture", "Take screenshot", zenIcon("screenshot"), () =>
         this.startCapture(tab)
       );
       addAction("Portrait", "Capture in Portrait Mode", "portrait", button =>
@@ -1013,7 +1024,7 @@
           "permission-popup-permission-icon",
           "zen-site-data-permission-icon"
         );
-        iconButton.setAttribute("image", icon("inspect"));
+        iconButton.setAttribute("image", zenIcon("hammer"));
         iconButton.setAttribute("closemenu", "none");
 
         const labels = this.document.createXULElement("vbox");

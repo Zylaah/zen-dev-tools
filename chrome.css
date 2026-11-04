@@ -110,6 +110,10 @@
   box-sizing: border-box;
   width: 18px;
   height: 18px;
+  margin: 0;
+  padding: 0;
+  object-fit: contain;
+  object-position: center;
   pointer-events: none;
   -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity;
   fill: currentColor;
@@ -150,7 +154,7 @@
 }
 
 #arc-developer-site-setting .permission-popup-permission-icon {
-  list-style-image: url("chrome://sine/content/arc-developer-toolbar/icons/inspect.svg");
+  list-style-image: url("chrome://browser/skin/zen-icons/hammer.svg");
   -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity;
   fill: currentColor;
   stroke: currentColor;
