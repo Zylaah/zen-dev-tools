@@ -343,6 +343,16 @@
   position: relative !important;
 }
 
+.tabbrowser-tab[zen-essential][arc-developer-active="true"] > .tab-stack > .tab-background::before {
+  margin: 0 !important;
+  inset: 0 !important;
+  border-radius: inherit !important;
+  box-shadow: none !important;
+  outline: none !important;
+  /* stylelint-disable-next-line property-no-unknown */
+  corner-shape: superellipse(var(--zen-squircle-value));
+}
+
 .tabbrowser-tab[zen-essential][arc-developer-active="true"] > .tab-stack::after {
   content: "";
   position: absolute;
