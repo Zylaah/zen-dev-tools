@@ -361,7 +361,7 @@
   box-sizing: border-box;
   padding: 2px;
   pointer-events: none;
-  border-radius: var(--border-radius-medium);
+  border-radius: 8px;
   background: repeating-linear-gradient(135deg, #f8d526 0 7px, #161616 7px 14px) !important;
   mask:
     linear-gradient(#000 0 0) content-box,
