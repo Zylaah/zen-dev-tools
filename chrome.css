@@ -374,7 +374,7 @@
   background-size: auto !important;
   background-position: 0 0 !important;
   background-color: transparent !important;
-  border-radius: inherit !important;
+  border-radius: 8px !important;
   mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0) !important;
