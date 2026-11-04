@@ -120,6 +120,11 @@
   stroke: currentColor;
 }
 
+.arc-developer-action-inspect > img {
+  width: 17px;
+  height: 17px;
+}
+
 .arc-developer-action:hover {
   background: color-mix(in srgb, currentColor 14%, transparent) !important;
 }

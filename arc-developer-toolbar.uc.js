@@ -11,6 +11,7 @@
   const ATTR_ACTIVE = "arc-developer-active";
   const SITE_SETTING_ID = "arc-developer-site-setting";
   const PORTRAIT_PANEL_ID = "arc-portrait-panel";
+  const SPLIT_MENU_ID = "arc-developer-split-menu";
   const TOAST_ID = "arc-developer-toast-container";
   const ICON_BASE = "chrome://sine/content/arc-developer-toolbar/icons/";
   const ZEN_ICON_BASE = "chrome://browser/skin/zen-icons/";
@@ -107,6 +108,7 @@
 
       this.installListeners();
       this.ensurePortraitPanel();
+      this.ensureSplitMenu();
       this.installSiteControlsSetting();
       this.restoreTabs();
       this.scheduleReconcile();
@@ -157,10 +159,13 @@
 
       this.document.getElementById(SITE_SETTING_ID)?.remove();
       this.document.getElementById(PORTRAIT_PANEL_ID)?.remove();
+      this.document.getElementById(SPLIT_MENU_ID)?.remove();
       this.document.getElementById(TOAST_ID)?.remove();
 
       this._portrait.bitmap?.close?.();
       this._portrait.bitmap = null;
+      this._splitMenu = null;
+      this._splitMenuTab = null;
 
       if (window.__arcDeveloperToolbar?.version === VERSION) {
         delete window.__arcDeveloperToolbar;
@@ -433,13 +438,15 @@
       const actions = doc.createElementNS("http://www.w3.org/1999/xhtml", "div");
       actions.className = "arc-developer-actions";
 
-      const addAction = (label, title, file, handler) => {
+      const addAction = (label, title, file, handler, className = "") => {
         const button = doc.createElementNS(
           "http://www.w3.org/1999/xhtml",
           "button"
         );
         button.type = "button";
-        button.className = "arc-developer-action";
+        button.className = ["arc-developer-action", className]
+          .filter(Boolean)
+          .join(" ");
         button.title = title;
         button.setAttribute("aria-label", title);
         const img = doc.createElementNS("http://www.w3.org/1999/xhtml", "img");
@@ -477,10 +484,20 @@
       addAction("Network", "Toggle Network", "network", () =>
         this.openTool(tab, "netmonitor")
       );
-      addAction("Inspect", "Inspect Element", "inspect", () =>
-        this.openTool(tab, "inspector")
+      addAction(
+        "Inspect",
+        "Inspect Element",
+        "inspect",
+        () => this.openTool(tab, "inspector"),
+        "arc-developer-action-inspect"
       );
       addDivider();
+      addAction(
+        "Split",
+        "Split View",
+        zenIcon("split"),
+        button => this.openSplitMenu(tab, button)
+      );
       addAction("Close", "Turn off Developer Mode", "close", () =>
         this.setEnabled(tab, false)
       );
@@ -613,6 +630,54 @@
       } catch (error) {
         console.error("[Arc Developer Toolbar] Screenshot failed", error);
       }
+    }
+
+    ensureSplitMenu() {
+      let menu = this.document.getElementById(SPLIT_MENU_ID);
+      if (menu) {
+        this._splitMenu = menu;
+        return menu;
+      }
+
+      menu = this.document.createXULElement("menupopup");
+      menu.id = SPLIT_MENU_ID;
+
+      const options = [
+        ["Grid", "cmd_zenSplitViewGrid"],
+        ["Vertical", "cmd_zenSplitViewVertical"],
+        ["Horizontal", "cmd_zenSplitViewHorizontal"],
+        ["Unsplit", "cmd_zenSplitViewUnsplit"],
+      ];
+
+      for (const [label, commandId] of options) {
+        const item = this.document.createXULElement("menuitem");
+        item.setAttribute("label", label);
+        item.addEventListener("command", () => {
+          const tab = this._splitMenuTab;
+          if (tab) {
+            this.selectTab(tab);
+          }
+          this.document.getElementById(commandId)?.doCommand();
+        });
+        menu.appendChild(item);
+      }
+
+      this.document.getElementById("mainPopupSet")?.appendChild(menu);
+      this._splitMenu = menu;
+      return menu;
+    }
+
+    openSplitMenu(tab, anchor) {
+      const menu = this.ensureSplitMenu();
+      if (!menu || !anchor) {
+        return;
+      }
+      this._splitMenuTab = tab;
+      this.selectTab(tab);
+      if (menu.state !== "closed") {
+        menu.hidePopup();
+      }
+      menu.openPopup(anchor, "after_start", 0, 4);
     }
 
     async openTool(tab, toolId) {
