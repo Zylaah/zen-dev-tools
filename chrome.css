@@ -1,0 +1,295 @@
+/* Arc Developer Toolbar — chrome styles for Zen Browser */
+
+:root {
+  --arc-developer-toolbar-height: 38px;
+}
+
+.browserContainer:has(> .arc-developer-toolbar:not([hidden])) {
+  --arc-developer-toolbar-active: 1;
+}
+
+.browserContainer:has(> .arc-developer-toolbar:not([hidden])) > .browserStack {
+  grid-area: browserstack !important;
+  margin-top: var(--arc-developer-toolbar-height) !important;
+}
+
+.arc-developer-toolbar {
+  --arc-developer-bg: var(
+    --zen-tab-header-background,
+    var(--zen-main-browser-background-toolbar, var(--toolbar-bgcolor, #2b2d33))
+  );
+  --arc-developer-fg: var(
+    --zen-tab-header-foreground,
+    var(--toolbox-textcolor, #f5f7fa)
+  );
+
+  grid-area: rdm-toolbar;
+  position: relative;
+  z-index: 5;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  height: var(--arc-developer-toolbar-height);
+  min-height: var(--arc-developer-toolbar-height);
+  max-height: var(--arc-developer-toolbar-height);
+  padding: 3px 8px;
+  margin: 0;
+  overflow: hidden;
+  color: var(--arc-developer-fg) !important;
+  background: var(--arc-developer-bg) !important;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 15%, transparent);
+  border-radius: 0;
+}
+
+.arc-developer-toolbar[hidden] {
+  display: none !important;
+}
+
+.arc-developer-url {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 28px;
+  margin: 0;
+  padding: 0 10px;
+  border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  border-radius: 7px;
+  background: color-mix(in srgb, currentColor 8%, transparent);
+  color: inherit;
+  font: inherit;
+  font-size: 12px;
+  line-height: 28px;
+  outline: none;
+}
+
+.arc-developer-url:focus,
+.arc-developer-url:focus-visible {
+  border-color: color-mix(in srgb, currentColor 40%, transparent);
+  background: color-mix(in srgb, currentColor 12%, transparent);
+}
+
+.arc-developer-actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+}
+
+.arc-developer-action {
+  appearance: none !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  min-height: 30px;
+  margin: 0;
+  padding: 0;
+  border: 0 !important;
+  border-radius: var(--toolbarbutton-border-radius, 7px);
+  color: inherit;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+  cursor: pointer;
+}
+
+.arc-developer-action > img {
+  display: block;
+  box-sizing: border-box;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity;
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+.arc-developer-action:hover {
+  background: color-mix(in srgb, currentColor 14%, transparent) !important;
+}
+
+.arc-developer-action:active {
+  background: color-mix(in srgb, currentColor 22%, transparent) !important;
+}
+
+.arc-developer-action:focus-visible {
+  background: color-mix(in srgb, currentColor 14%, transparent) !important;
+  outline: 2px solid color-mix(in srgb, currentColor 45%, transparent) !important;
+  outline-offset: 1px;
+}
+
+.arc-developer-action[disabled="true"],
+.arc-developer-action:disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.arc-developer-divider {
+  align-self: center;
+  width: 1px;
+  min-width: 1px;
+  height: 18px;
+  margin-inline: 4px;
+  background: color-mix(in srgb, currentColor 25%, transparent);
+}
+
+#arc-developer-site-setting {
+  cursor: pointer;
+}
+
+#arc-developer-site-setting .permission-popup-permission-icon {
+  list-style-image: url("chrome://sine/content/arc-developer-toolbar/icons/inspect.svg");
+  -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity;
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+#arc-portrait-panel {
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+#arc-portrait-panel .panel-arrowcontent,
+#arc-portrait-panel .panel-arrowcontainer {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+#arc-portrait-panel .arc-portrait-content {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 12px;
+  background: light-dark(#f4f4f6, #2b2d33);
+  color: light-dark(#1b1d24, #f7f7f9);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+}
+
+#arc-portrait-panel .arc-portrait-capture {
+  appearance: none !important;
+  min-height: 34px;
+  width: 100%;
+  margin: 0;
+  padding: 7px 12px !important;
+  border: 1px solid color-mix(in srgb, currentColor 24%, transparent) !important;
+  border-radius: 8px !important;
+  background: light-dark(#ffffff, #3a3d45) !important;
+  color: inherit !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18) !important;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#arc-portrait-panel .arc-portrait-capture:hover {
+  background: light-dark(#e9e9ed, #4a4e59) !important;
+}
+
+#arc-portrait-panel .arc-portrait-preview {
+  display: block;
+  width: 300px;
+  height: auto;
+  max-width: 100%;
+  border-radius: 9px;
+  background: #111;
+}
+
+#arc-portrait-panel .arc-portrait-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+#arc-portrait-panel .arc-portrait-swatch {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  padding: 3px;
+  border-radius: 50% !important;
+  border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+  box-shadow: 0 0 0 3px rgba(128, 128, 128, 0.14);
+  cursor: pointer;
+}
+
+#arc-portrait-panel .arc-portrait-swatch[aria-pressed="true"] {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+#arc-portrait-panel .arc-portrait-solid {
+  background: #f58073;
+}
+
+#arc-portrait-panel .arc-portrait-hue {
+  appearance: none;
+  flex: 1;
+  min-width: 0;
+  height: 22px;
+  background: transparent;
+}
+
+#arc-portrait-panel .arc-portrait-hue::-moz-range-track {
+  height: 9px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    #ff5555,
+    #ffbb55,
+    #ffff55,
+    #55d877,
+    #55bbff,
+    #7755ff,
+    #ff55cc,
+    #ff5555
+  );
+}
+
+#arc-portrait-panel .arc-portrait-hue::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: 2px solid white;
+  border-radius: 50%;
+  background: hsl(var(--arc-portrait-hue, 20) 90% 68%);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+.tabbrowser-tab[arc-developer-active="true"] .tab-background {
+  position: relative !important;
+}
+
+.tabbrowser-tab[arc-developer-active="true"] .tab-background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  padding: 3px;
+  border-radius: var(--zen-border-radius, 10px);
+  background: repeating-linear-gradient(135deg, #f8d526 0 7px, #161616 7px 14px);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+:root[inDOMFullscreen="true"] .arc-developer-toolbar {
+  display: none !important;
+}
+
+:root[inDOMFullscreen="true"]
+  .browserContainer:has(> .arc-developer-toolbar)
+  > .browserStack {
+  margin-top: 0 !important;
+}

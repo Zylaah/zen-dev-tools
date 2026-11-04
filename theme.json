@@ -1,0 +1,32 @@
+{
+  "id": "arc-developer-toolbar",
+  "name": "Arc Developer Toolbar",
+  "description": "Arc-style per-tab Developer Mode for Zen: Site Data toggle, full URL bar, Copy, Capture, Portrait, Console, Network, and Inspect.",
+  "author": "zen-dev-tools",
+  "version": "1.0.0",
+  "createdAt": "2026-11-04",
+  "updatedAt": "2026-11-04",
+  "homepage": "https://github.com/zen-dev-tools/zen-dev-tools",
+  "fork": ["zen"],
+  "tags": [
+    "developer tools",
+    "toolbar",
+    "arc",
+    "devtools"
+  ],
+  "style": {
+    "chrome": "chrome.css"
+  },
+  "scripts": {
+    "arc-developer-toolbar.uc.js": {
+      "name": "Arc Developer Toolbar",
+      "description": "Per-tab Arc-style developer toolbar and Site Data toggle.",
+      "include": [
+        "chrome://browser/content/browser.xhtml"
+      ],
+      "loadOrder": 10
+    }
+  },
+  "supportsUnload": true,
+  "no-updates": false
+}
