@@ -22,12 +22,6 @@
     --zen-tab-header-foreground,
     var(--toolbox-textcolor, #f5f7fa)
   );
-  --arc-developer-stripe: color-mix(
-    in srgb,
-    var(--arc-developer-bg) 82%,
-    white
-  );
-
   grid-area: rdm-toolbar;
   position: relative;
   z-index: 5;
@@ -43,10 +37,11 @@
   margin: 0;
   overflow: hidden;
   color: var(--arc-developer-fg) !important;
-  background: repeating-linear-gradient(
+  background-color: var(--arc-developer-bg) !important;
+  background-image: repeating-linear-gradient(
     135deg,
-    var(--arc-developer-stripe) 0 7px,
-    var(--arc-developer-bg) 7px 14px
+    color-mix(in srgb, white 10%, transparent) 0 5px,
+    transparent 5px 18px
   ) !important;
   border: 0;
   border-bottom: 1px solid color-mix(in srgb, currentColor 15%, transparent);
