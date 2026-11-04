@@ -24,7 +24,7 @@
   );
   --arc-developer-stripe: color-mix(
     in srgb,
-    var(--arc-developer-bg) 78%,
+    var(--arc-developer-bg) 82%,
     white
   );
 
@@ -43,28 +43,14 @@
   margin: 0;
   overflow: hidden;
   color: var(--arc-developer-fg) !important;
-  background: var(--arc-developer-bg) !important;
-  border: 0;
-  border-radius: 0;
-}
-
-.arc-developer-toolbar::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  box-sizing: border-box;
-  padding: 2px;
-  pointer-events: none;
   background: repeating-linear-gradient(
     135deg,
     var(--arc-developer-stripe) 0 7px,
     var(--arc-developer-bg) 7px 14px
-  );
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite: exclude;
+  ) !important;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 15%, transparent);
+  border-radius: 0;
 }
 
 .arc-developer-toolbar[hidden] {
