@@ -742,9 +742,13 @@
       const content = doc.createElementNS("http://www.w3.org/1999/xhtml", "div");
       content.className = "arc-portrait-content";
 
-      const capture = doc.createXULElement("button");
-      capture.setAttribute("label", "Capture in Portrait Mode");
+      const capture = doc.createElementNS(
+        "http://www.w3.org/1999/xhtml",
+        "button"
+      );
+      capture.type = "button";
       capture.className = "arc-portrait-capture";
+      capture.textContent = "Capture in Portrait Mode";
 
       const preview = doc.createElementNS("http://www.w3.org/1999/xhtml", "canvas");
       preview.width = 320;
@@ -794,7 +798,7 @@
         this._portrait.mode = "solid";
         this.drawPortrait(preview);
       });
-      capture.addEventListener("command", () => this.exportPortrait());
+      capture.addEventListener("click", () => this.exportPortrait());
       panel.addEventListener("popuphidden", () => {
         this._portrait.bitmap?.close?.();
         this._portrait.bitmap = null;

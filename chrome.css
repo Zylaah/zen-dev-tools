@@ -22,6 +22,11 @@
     --zen-tab-header-foreground,
     var(--toolbox-textcolor, #f5f7fa)
   );
+  --arc-developer-stripe: color-mix(
+    in srgb,
+    var(--arc-developer-bg) 78%,
+    white
+  );
 
   grid-area: rdm-toolbar;
   position: relative;
@@ -40,8 +45,26 @@
   color: var(--arc-developer-fg) !important;
   background: var(--arc-developer-bg) !important;
   border: 0;
-  border-bottom: 1px solid color-mix(in srgb, currentColor 15%, transparent);
   border-radius: 0;
+}
+
+.arc-developer-toolbar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  box-sizing: border-box;
+  padding: 2px;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    135deg,
+    var(--arc-developer-stripe) 0 7px,
+    var(--arc-developer-bg) 7px 14px
+  );
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
 }
 
 .arc-developer-toolbar[hidden] {
@@ -191,11 +214,13 @@
 }
 
 #arc-portrait-panel .arc-portrait-content {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 320px;
   gap: 10px;
-  padding: 10px;
+  padding: 12px;
   border-radius: 12px;
   background: light-dark(#f4f4f6, #2b2d33);
   color: light-dark(#1b1d24, #f7f7f9);
@@ -204,17 +229,24 @@
 
 #arc-portrait-panel .arc-portrait-capture {
   appearance: none !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
   min-height: 34px;
-  width: 100%;
-  margin: 0;
+  width: 100% !important;
+  margin: 0 !important;
   padding: 7px 12px !important;
   border: 1px solid color-mix(in srgb, currentColor 24%, transparent) !important;
   border-radius: 8px !important;
   background: light-dark(#ffffff, #3a3d45) !important;
   color: inherit !important;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18) !important;
+  font: inherit;
   font-size: 13px;
   font-weight: 600;
+  text-align: center;
   cursor: pointer;
 }
 
@@ -224,17 +256,22 @@
 
 #arc-portrait-panel .arc-portrait-preview {
   display: block;
-  width: 300px;
-  height: auto;
+  box-sizing: border-box;
+  width: 100%;
   max-width: 100%;
+  height: auto;
+  margin: 0;
   border-radius: 9px;
   background: #111;
 }
 
 #arc-portrait-panel .arc-portrait-controls {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  align-self: stretch;
+  width: 100%;
   gap: 10px;
 }
 
