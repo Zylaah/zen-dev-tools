@@ -339,26 +339,44 @@
   pointer-events: none;
 }
 
-.tabbrowser-tab[zen-essential][arc-developer-active="true"] {
+.tabbrowser-tab[zen-essential][arc-developer-active="true"] > .tab-stack > .tab-background {
   position: relative !important;
-}
-
-.tabbrowser-tab[zen-essential][arc-developer-active="true"]::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 10;
-  box-sizing: border-box;
-  padding: 3px;
-  pointer-events: none;
-  border-radius: var(--border-radius-medium, 10px);
-  background: repeating-linear-gradient(135deg, #f8d526 0 7px, #161616 7px 14px) !important;
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite: exclude;
+  overflow: hidden !important;
+  background-color: transparent !important;
+  background-image: repeating-linear-gradient(
+    135deg,
+    #f8d526 0 7px,
+    #161616 7px 14px
+  ) !important;
+  border-radius: var(--border-radius-medium) !important;
   /* stylelint-disable-next-line property-no-unknown */
   corner-shape: superellipse(var(--zen-squircle-value));
+}
+
+.tabbrowser-tab[zen-essential][arc-developer-active="true"]:not([visuallyselected])
+  > .tab-stack
+  > .tab-background::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  margin: var(--zen-essential-bg-margin, 2px) !important;
+  background: var(--zen-toolbar-element-bg) !important;
+  border-radius: calc(
+    var(--border-radius-medium) - var(--zen-essential-bg-margin, 2px)
+  ) !important;
+  /* stylelint-disable-next-line property-no-unknown */
+  corner-shape: superellipse(var(--zen-squircle-value));
+  pointer-events: none;
+}
+
+.tabbrowser-tab[zen-essential][arc-developer-active="true"]:not([visuallyselected]):hover
+  > .tab-stack
+  > .tab-background::before {
+  background: light-dark(
+    rgba(0, 0, 0, 0.1),
+    var(--tab-background-color-selected)
+  ) !important;
 }
 
 :root[inDOMFullscreen="true"] .arc-developer-toolbar {
