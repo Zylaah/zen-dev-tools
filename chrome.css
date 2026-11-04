@@ -53,21 +53,24 @@
   min-width: 0;
   height: 28px;
   margin: 0;
-  padding: 0 10px;
-  border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
-  border-radius: 7px;
-  background: color-mix(in srgb, currentColor 8%, transparent);
+  padding: 0 8px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
   color: inherit;
   font: inherit;
   font-size: 12px;
   line-height: 28px;
   outline: none;
+  box-shadow: none;
 }
 
 .arc-developer-url:focus,
 .arc-developer-url:focus-visible {
-  border-color: color-mix(in srgb, currentColor 40%, transparent);
-  background: color-mix(in srgb, currentColor 12%, transparent);
+  border: 0;
+  background: transparent;
+  outline: none;
+  box-shadow: none;
 }
 
 .arc-developer-actions {
