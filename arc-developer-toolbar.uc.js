@@ -462,9 +462,7 @@
         actions.appendChild(divider);
       };
 
-      addAction("Copy", "Copy URL", zenIcon("edit-copy"), () =>
-        this.copyUrl(tab)
-      );
+      addAction("Copy", "Copy URL", zenIcon("link"), () => this.copyUrl(tab));
       addDivider();
       addAction("Capture", "Take screenshot", zenIcon("screenshot"), () =>
         this.startCapture(tab)
