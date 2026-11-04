@@ -339,38 +339,26 @@
   pointer-events: none;
 }
 
-.tabbrowser-tab[zen-essential][arc-developer-active="true"] > .tab-stack > .tab-background {
-  overflow: hidden;
+.tabbrowser-tab[zen-essential][arc-developer-active="true"] {
+  position: relative !important;
 }
 
-.tabbrowser-tab[zen-essential][arc-developer-active="true"] > .tab-stack > .tab-background::before {
+.tabbrowser-tab[zen-essential][arc-developer-active="true"]::after {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 10;
   box-sizing: border-box;
-  margin: 0;
-  padding: var(--zen-essential-bg-margin, 2px);
+  padding: 3px;
+  pointer-events: none;
   border-radius: var(--border-radius-medium, 10px);
-  background: repeating-linear-gradient(135deg, #f8d526 0 7px, #161616 7px 14px);
+  background: repeating-linear-gradient(135deg, #f8d526 0 7px, #161616 7px 14px) !important;
   mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
   mask-composite: exclude;
-  pointer-events: none;
   /* stylelint-disable-next-line property-no-unknown */
   corner-shape: superellipse(var(--zen-squircle-value));
-}
-
-@media -moz-pref("zen.theme.essentials-favicon-bg") {
-  .tabbrowser-tab[zen-essential][arc-developer-active="true"][visuallyselected] > .tab-stack > .tab-background::before {
-    background:
-      repeating-linear-gradient(135deg, #f8d526 0 7px, #161616 7px 14px)
-        padding-box,
-      var(--zen-essential-tab-selected-bg, light-dark(rgba(255, 255, 255, 0.85), rgba(68, 64, 64, 0.85)))
-        content-box;
-    mask: none;
-  }
 }
 
 :root[inDOMFullscreen="true"] .arc-developer-toolbar {
